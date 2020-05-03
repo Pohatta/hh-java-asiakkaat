@@ -30,7 +30,7 @@ div {
 }
 
 .wrapper {
-	max-width: 350px;
+	max-width: 440px;
 }
 
 table#asiakas-lista {
@@ -59,4 +59,21 @@ thead {
     background: #45a049;
     color: #fff;
 }
+
+#uusi,
+#takaisin {
+	cursor: pointer;
+	color: blue;
+}
+
+.error {
+	color: red;
+}
+
+.poista{
+	color: red;
+	text-decoration: underline;
+	cursor: pointer;	
+}
+
 
