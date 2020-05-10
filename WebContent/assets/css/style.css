@@ -76,4 +76,8 @@ thead {
 	cursor: pointer;	
 }
 
+.poistettu {
+	background-color: red !important;
+}
+
 

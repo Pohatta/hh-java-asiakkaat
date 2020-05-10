@@ -17,6 +17,7 @@
 <table id="asiakas-lista">
 	<thead>				
 		<tr>
+			<th>id</th>
 			<th>etunimi</th>
 			<th>sukunimi</th>
 			<th>puhelin</th>
@@ -46,38 +47,41 @@ $(document).ready(function(){
 });
 
 	function hae(){
-		
 		$("#asiakas-lista tbody").empty();
-		
 		$.ajax({url:"asiakkaat/" + $("#haku").val(), type:"GET", dataType:"json", success:function(result){//Funktio palauttaa tiedot json-objektina
-			console.log("vastaus:", result);
+			//console.log("vastaus:", result);
 			$.each(result.asiakkaat, function(i, field){  
 	        	var htmlStr;
-	        	htmlStr+="<tr>";
+	        	htmlStr+="<tr id='rivi_"+field.asiakas_id+"'>";
+	        	htmlStr+="<td>"+field.asiakas_id+"</td>";
 	        	htmlStr+="<td>"+field.etunimi+"</td>";
 	        	htmlStr+="<td>"+field.sukunimi+"</td>";
 	        	htmlStr+="<td>"+field.puhelin+"</td>";
-	        	htmlStr+="<td>"+field.sposti+"</td>"; 
-	        	htmlStr+="<td><span class='poista' onclick=poista('"+field.sposti+"')>Poista</span></td>";
+	        	htmlStr+="<td>"+field.sposti+"</td>";
+	        	htmlStr+="<td><a href='muutaasiakas.jsp?id="+field.asiakas_id+"'>Muuta</a>&nbsp;"; 
+	        	htmlStr+="<span class='poista' onclick=poista('"+field.asiakas_id+"')>Poista</span></td>";
 	        	htmlStr+="</tr>";
 	        	$("#asiakas-lista tbody").append(htmlStr);
 	        });	
 	    }});
 	};
 	
-	function poista(sposti){
-		
-		console.log(sposti);
-		if(confirm("Poista asiakas " + sposti +"?")){
-			$.ajax({url:"asiakkaat/"+sposti, type:"DELETE", dataType:"json", success:function(result) { //result on joko {"response:1"} tai {"response:0"}
+	function poista(id){
+		//console.log("poista id: " + id);
+		if(confirm("Poista asiakas " + id +"?")){
+			$.ajax({url:"asiakkaat/"+id, type:"DELETE", dataType:"json", success:function(result) { //result on joko {"response:1"} tai {"response:0"}
 		        if(result.response==0){
 		        	$("#ilmo").html("Asiakkaan poisto ei onnistunut.");
 		        }else if(result.response==1){
-		        	alert("Asiakkaan " + sposti +" poisto onnistui.");
+		        	//$("#rivi_"+id).css("background-color", "red");
+		        	alert("Asiakkaan " + id +" poisto onnistui.");
 		        	hae();        	
 				}
 		    }});
-		}
+		} else {
+			$("#rivi_"+id).css("background-color", "red");
+			rivi.removeClass("poistettu");
+		};
 	};
 
 
