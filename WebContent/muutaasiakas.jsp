@@ -5,13 +5,14 @@
 <head>
 <meta charset="ISO-8859-1">
 <script src="assets/scripts/main.js"></script>
+<script src="assets/scripts/api.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
 <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 <title>Insert title here</title>
 </head>
 <body>
-<span id="takaisin">Takaisin listaukseen</span>
+<span><a id="takaisin" href="listaasiakkaat.jsp">Listaan</a></span>
 <form id="tiedot">
 	<table>
 		<thead>				
@@ -28,16 +29,20 @@
 				<td><input type="text" name="sukunimi" id="sukunimi"></td>
 				<td><input type="text" name="puhelin" id="puhelin"></td>
 				<td><input type="text" name="sposti" id="sposti"></td> 
-				<td><input type="submit" id="tallenna" value="Muuta"></td>
+				<td><input type="button" id="tallenna" value="Muuta" onclick="luoTaiMuutaAsiakas('PUT')"></td>
 			</tr>
 		</tbody>
 	</table>
-	<input type="number" name="asiakas_id" id="asiakas_id">
+	<input type="hidden" name="asiakas_id" id="asiakas_id">
 </form>
 <span id="ilmo"></span>
 </body>
 <script>
-$(document).ready(function(){
+window.onload = () => {
+	haeYksiAsiakas();
+	document.getElementById("etunimi").focus();
+};
+/* $(document).ready(function(){
 	$("#takaisin").click(function(){
 		document.location="listaasiakkaat.jsp";
 	});
@@ -102,6 +107,6 @@ function paivitaTiedot(){
       	$("#id","#etunimi", "#sukunimi", "#puhelin", "#sposti").val("");
 	  }
   }});	
-}
+} */
 </script>
 </html>

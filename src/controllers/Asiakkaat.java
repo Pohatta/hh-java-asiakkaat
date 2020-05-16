@@ -104,7 +104,7 @@ public class Asiakkaat extends HttpServlet {
 	
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Delete()");	
-		String pathInfo = request.getPathInfo();	//haetaan kutsun polkutiedot, esim. /ABC-222		
+		String pathInfo = request.getPathInfo();	//haetaan kutsun polkutiedot, esim. /28		
 		System.out.println("polku: "+pathInfo);
 		int id = Integer.parseInt(pathInfo.replace("/", ""));		
 		response.setContentType("application/json");

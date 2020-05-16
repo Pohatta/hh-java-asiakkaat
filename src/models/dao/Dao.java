@@ -20,7 +20,7 @@ public class Dao {
     	String project = "Asiakaslista/" ;
     	//path += "/webapps/"; //Tuotannossa. Laita tietokanta webapps-kansioon
     	String url = "jdbc:sqlite:"+path+project+db;
-    	System.out.println(url);
+    	//System.out.println(url);
     	try {	       
     		Class.forName("org.sqlite.JDBC");
 	        con = DriverManager.getConnection(url);	
@@ -87,31 +87,21 @@ public class Dao {
 		return paluuArvo;
 	}
 	
-	public boolean poistaAsiakas(int asiakasId){ //Oikeassa el�m�ss� tiedot ensisijaisesti merkit��n poistetuksi.
+	public boolean poistaAsiakas(int asiakas_id) {
 		boolean paluuArvo=true;
 		sql="DELETE FROM asiakkaat WHERE asiakas_id=?";						  
 		try {
 			con = yhdista();
-			//testaa löytyykö asiakas
-			stmtPrep = con.prepareStatement("SELECT asiakas_id FROM asiakkaat WHERE asiakas_id=?");
-			stmtPrep.setString(1, "%" + asiakasId + "%");
-    		rs = stmtPrep.executeQuery();
-    		int foundId = rs.getInt(1);
-    		//poista jos löytyy
-    		if(foundId!=asiakasId){
-    			stmtPrep=con.prepareStatement(sql); 
-    			stmtPrep.setInt(1, asiakasId);			
-    			stmtPrep.executeUpdate();
-    		} else {
-    			paluuArvo=false;
-    		}
+			stmtPrep=con.prepareStatement(sql); 
+			stmtPrep.setInt(1, asiakas_id);			
+			stmtPrep.executeUpdate();
 	        con.close();
 		} catch (Exception e) {				
 			e.printStackTrace();
 			paluuArvo=false;
 		}				
 		return paluuArvo;
-	}	
+	}
 	
 	public Asiakas etsiAsiakas(int id) {
 		Asiakas asiakas = null;

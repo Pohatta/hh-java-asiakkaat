@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
+<script src="assets/scripts/api.js"></script>
 <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>Asiakaslista</title>
@@ -13,7 +14,7 @@
 	<label for="haku">Hakusana:</label><br>
 	<input type="text" id="haku" name="haku"><br>		 
 	<input type="submit" value="Hae" id="haenappi">
-	<span id="uusi">Uusi</span>
+	<span><a id="uusi" href="lisaaasiakas.jsp">Uusi</a></span>
 <table id="asiakas-lista">
 	<thead>				
 		<tr>
@@ -25,24 +26,31 @@
 			<th></th>							
 		</tr>
 	</thead>
-	<tbody>
+	<tbody id="listaus">
 	</tbody>
 </table>
+<span id="ilmo"></span>
 </div>
 <script>
-$(document).ready(function(){
+
+window.onload = () => {
+	haeAsiakasLista();
+	document.getElementById("haku").focus();
+};
+
+/* $(document).ready(function(){
 	
 	//ohjaa lisäämissivulle
-	$("#uusi").click(function(){
+	 $("#uusi").click(function(){
 		document.location="lisaaasiakas.jsp";
-	});
+	}); 
 	
 	
 	//hae asiakkaat napin klikkauksella
 	hae();
-	$("#haenappi").click(function(){		
+	 $("#haenappi").click(function(){		
 		hae();
-	});
+	}); 
 
 });
 
@@ -82,7 +90,7 @@ $(document).ready(function(){
 			$("#rivi_"+id).css("background-color", "red");
 			rivi.removeClass("poistettu");
 		};
-	};
+	}; */
 
 
 </script>
